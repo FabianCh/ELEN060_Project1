@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 
 def entropy(probability_distribution):
@@ -33,8 +34,8 @@ def mutual_information(joint_distribution):
     h = 0
     for i in range(len(joint_distribution)):
         pi = sum(joint_distribution[i])
-        for j in range(len(joint_distribution[1])):
-            pj = sum(joint_distribution[:][j])
+        for j in range(len(joint_distribution[i])):
+            pj = np.sum(joint_distribution, axis=0)[j]
             p = joint_distribution[i][j]
             if p != 0:
                 h -= p * math.log2(p / (pi * pj))
