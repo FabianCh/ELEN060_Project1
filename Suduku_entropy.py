@@ -1,5 +1,4 @@
 import math
-import numpy as np
 
 
 def single_square_entropy(number_of_possibility=9):
@@ -16,7 +15,7 @@ def square_entropy(square):
     for i in range(3):
         for j in range(3):
             n = square[i][j]
-            if n !=0:
+            if n != 0:
                 if n not in number_saw:
                     number_saw.append(n)
                     counter_saw += 1
@@ -28,7 +27,7 @@ def sudoku_entropy(sudoku_grid):
     ans = 0
     for i in range(9):
         for j in range(9):
-            if sudoku_grid[i][j] != 0:
+            if sudoku_grid[i][j] == 0:
                 number_saw = []
                 counter_saw = 0
 
@@ -59,7 +58,7 @@ def sudoku_entropy(sudoku_grid):
 
                 for i2 in range(3):
                     for j2 in range(3):
-                        n = sudoku_grid[3*i_square + i2][j_square + j2]
+                        n = sudoku_grid[3*i_square + i2][3 * j_square + j2]
                         if n != 0:
                             if n not in number_saw:
                                 number_saw.append(n)
@@ -68,8 +67,3 @@ def sudoku_entropy(sudoku_grid):
                 number_of_possibility = 9 - counter_saw
                 ans += single_square_entropy(number_of_possibility)
     return ans
-
-
-
-
-
