@@ -69,27 +69,13 @@ def cond_mutual_information(joint_distribution_3d):
     joint_distribution_1_3 = np.sum(joint_distribution_3d, axis=1)
     h_1_given_3 = conditional_entropy(joint_distribution_1_3)
 
-    # calculation of H(X|Y, Z) = H(Z, Y, X) - H(Y|Z) - H(Z).
+    # calculation of H(X|Y, Z) = H(X, Y|Z) - H(X|Z).
 
-    # calculation of H(Z, Y, X).
-    h_1_2_3 = 0
-    for i in range(len(joint_distribution_3d)):
-        for j in range(len(joint_distribution_3d[i])):
-            for k in range(len(joint_distribution_3d[i][j])):
-                p = joint_distribution_3d[i][j][k]
-                if p != 0:
-                    h_1_2_3 -= p * math.log2(p)
-
-    # calculation of H(Z).
-    probability_distribution_3 = np.sum(joint_distribution_3d, axis=(0, 1))
-    h_3 = entropy(probability_distribution_3)
-
-    # calculation of H(Y|Z).
-    probability_distribution_2_3 = np.sum(joint_distribution_3d, axis=0)
-    h_2_given_3 = conditional_entropy(probability_distribution_2_3)
+    # calculation of H(X, Y|Z).
+    h_1_2_given_3 = cond_joint_entropy(joint_distribution_3d)
 
     # calculation of H(X|Y, Z).
-    h_1_given_2_3 = h_1_2_3 - h_2_given_3 - h_3
+    h_1_given_2_3 = h_1_2_given_3 - h_1_given_3
 
     # calculation and return of I(X ; Y|Z).
     return h_1_given_3 - h_1_given_2_3
