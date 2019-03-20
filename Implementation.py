@@ -33,17 +33,26 @@ def conditional_entropy(joint_distribution):
 def mutual_information(joint_distribution):
     h = 0
     for i in range(len(joint_distribution)):
-        pi = sum(joint_distribution[i])
+        pi = np.sum(joint_distribution, axis=1)[i]
         for j in range(len(joint_distribution[i])):
             pj = np.sum(joint_distribution, axis=0)[j]
             p = joint_distribution[i][j]
             if p != 0:
-                h -= p * math.log2(p / (pi * pj))
+                h += p * math.log2(p / (pi * pj))
     return h
 
 
-def cond_joint_entropy():
-    pass
+def cond_joint_entropy(joint_distribution_3d):
+    h = 0
+    for i in range(len(joint_distribution_3d)):
+        for j in range(len(joint_distribution_3d[i])):
+            for k in range(len(joint_distribution_3d[i][j])):
+                p = joint_distribution_3d[i][j][k]
+                if p != 0:
+                    h -= p * math.log2(p)
+    x_probability_distribution = np.sum(joint_distribution_3d, axis=(0, 1))
+    h3 = entropy(x_probability_distribution)
+    return h - h3
 
 
 def cond_mutual_information():

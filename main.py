@@ -28,8 +28,25 @@ y_w_joint_distribution = np.array([[1/8, 1/8, 1/16, 0],
                                    [3/8, 1/8, 1/16, 1/8]])
 w_z_joint_distribution = np.array([[0, 5/16],
                                    [11/16, 0]])
-y_z_joint_distribution = np.array([[1/8, 1/8, 1/16, 0],
-                                   [1/8, 1/8, 3/16, 1/4]])
+y_z_joint_distribution = np.array([[3/8, 1/8, 1/16, 1/8],
+                                   [1/8, 1/8, 1/16, 0]])
+
+x_y_w_joint_distribution = np.array([[[0, 1/8], [1/16, 0], [1/16, 0], [1/4, 0]],
+                                    [[1/16, 0], [0, 1/8], [1/16, 0], [0, 0]],
+                                    [[1/32, 0], [1/32, 0], [0, 1/16], [0, 0]],
+                                    [[1/32, 0], [1/32, 0], [1/16, 0], [0, 0]]])
+
+w_z_x_joint_distribution = np.array([
+    [
+        [0, 0, 0, 0],
+        [1/8, 1/8, 1/16, 0]
+    ],
+    [
+        [1/8, 1/8, 3/16, 1/4],
+        [0, 0, 0, 0]
+    ]
+
+])
 
 print("1.   H(X) = " + str(entropy(x_probability_distribution)))
 print("     H(Y) = " + str(entropy(y_probability_distribution)))
@@ -42,11 +59,11 @@ print("     H(Y,W) = " + str(joint_entropy(y_w_joint_distribution)))
 print("     H(W,Z) = " + str(joint_entropy(w_z_joint_distribution)) + "\n")
 
 print("3.   H(X|Y) = " + str(conditional_entropy(x_y_joint_distribution)))
-print("     H(W|X) = " + str(conditional_entropy(x_w_joint_distribution)))
+print("     H(W|X) = " + str(conditional_entropy(x_w_joint_distribution.transpose())))
 print("     H(Z|W) = " + str(conditional_entropy(w_z_joint_distribution)))
 print("     H(W|Z) = " + str(conditional_entropy(np.transpose(w_z_joint_distribution))) + "\n")
 
-print("4.   H(X,Y|W) = " + str(None))
+print("4.   H(X,Y|W) = " + str(cond_joint_entropy(x_y_w_joint_distribution)))
 print("     H(W,Z|X) = " + str(None) + "\n")
 
 print("5.   I(X;Y) = " + str(mutual_information(x_y_joint_distribution)))
