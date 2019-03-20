@@ -64,24 +64,24 @@ print("     H(Z|W) = " + str(conditional_entropy(w_z_joint_distribution)))
 print("     H(W|Z) = " + str(conditional_entropy(np.transpose(w_z_joint_distribution))) + "\n")
 
 print("4.   H(X,Y|W) = " + str(cond_joint_entropy(x_y_w_joint_distribution)))
-print("     H(W,Z|X) = " + str(None) + "\n")
+print("     H(W,Z|X) = " + str(cond_joint_entropy(w_z_x_joint_distribution)) + "\n")
 
 print("5.   I(X;Y) = " + str(mutual_information(x_y_joint_distribution)))
 print("     I(X;W) = " + str(mutual_information(x_w_joint_distribution)))
 print("     I(Y;Z) = " + str(mutual_information(y_z_joint_distribution)))
 print("     I(W;Z) = " + str(mutual_information(w_z_joint_distribution)) + "\n")
 
-print("6.   I(X;Y|W) = " + str(None))
-print("     I(W;Z|X) = " + str(None))
+print("6.   I(X;Y|W) = " + str(cond_mutual_information(x_y_w_joint_distribution)))
+print("     I(W;Z|X) = " + str(cond_mutual_information(w_z_x_joint_distribution)) + "\n")
 
-print("13.  H(single_square) = " + str(single_square_entropy()))
+print("13.  H(single_square) = " + str(single_square_entropy()) + "\n")
 
 square = [[0, 2, 0],
           [8, 0, 0],
           [0, 3, 0]]
 
-print("14.  H(square) = " + str(square_entropy(square)))
+print("14.  H(square) = " + str(square_entropy(square)) + "\n")
 
 sudoku_grid = np.load("sudoku.npy")
 
-print("15.  H(grid) = " + str(sudoku_entropy(sudoku_grid)))
+print("15.  H(grid) = " + str(sudoku_entropy(sudoku_grid)) + "\n")
